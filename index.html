@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+  <title>بحث سكربتات</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+    .search-form {
+      text-align: center;
+      margin: 20px 0;
+    }
+    input, button {
+      padding: 10px;
+      margin: 5px;
+      font-size: 16px;
+    }
+    .script-card {
+      background: white;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <h1 style="text-align: center;">بحث سكربتات</h1>
+  
+  <form class="search-form" method="POST" action="/search">
+    <input type="text" name="mapName" placeholder="ادخل اسم الماب" value="<%= locals.mapName || '' %>">
+    <button type="submit">بحث</button>
+  </form>
+
+  <% if (locals.error) { %>
+    <div style="color: red; text-align: center;"><%= error %></div>
+  <% } %>
+
+  <% if (locals.scripts) { %>
+    <% scripts.forEach(script => { %>
+      <div class="script-card">
+        <h3><%= script.title %></h3>
+        <p><%= script.game %></p>
+        <p>التقييم: <%= script.views %> مشاهدة</p>
+        <% if (script.script) { %>
+          <pre style="background: #eee; padding: 10px; overflow-x: auto;"><%= script.script %></pre>
+        <% } %>
+      </div>
+    <% }) %>
+  <% } %>
+</body>
+</html>
